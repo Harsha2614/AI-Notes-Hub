@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://ai-notes-hub-qf3m.onrender.com/"
+  baseURL: "https://ai-notes-hub-qf3m.onrender.com/api"
 });
 
 API.interceptors.request.use((req) => {
@@ -14,4 +14,4 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
-export default API; 
+export default API;
