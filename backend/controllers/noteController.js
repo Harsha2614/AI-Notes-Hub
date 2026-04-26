@@ -112,7 +112,7 @@ const summarizeNote = async (req, res) => {
       summary
     });
   } catch (error) {
-  console.log("Gemini Error:", error);
+  console.error("SUMMARY ERROR:", error);
 
   res.status(500).json({
     message: error.message

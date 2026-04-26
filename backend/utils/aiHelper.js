@@ -1,25 +1,31 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const genAI = new GoogleGenerativeAI(
-  process.env.GEMINI_API_KEY
-);
-
 const summarizeText = async (text) => {
-  const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash"
-  });
+  try {
+    const apiKey = process.env.GEMINI_API_KEY;
 
-  const prompt = `
-  Summarize this note in short and professional way:
+    if (!apiKey) {
+      throw new Error("GEMINI_API_KEY missing");
+    }
 
-  ${text}
-  `;
+    const genAI = new GoogleGenerativeAI(apiKey);
 
-  const result = await model.generateContent(prompt);
-  const response = await result.response;
-  const summary = response.text();
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash"
+    });
 
-  return summary;
+    const prompt = `Summarize this note professionally:\n\n${text}`;
+
+    const result = await model.generateContent(prompt);
+
+    const response = await result.response;
+
+    return response.text();
+
+  } catch (error) {
+    console.error("GEMINI ERROR:", error);
+    throw error;
+  }
 };
 
 module.exports = summarizeText;
