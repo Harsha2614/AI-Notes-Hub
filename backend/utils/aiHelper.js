@@ -1,17 +1,18 @@
 const OpenAI = require("openai");
 
 const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  baseURL: "https://integrate.api.nvidia.com/v1",
+  apiKey: process.env.NVIDIA_API_KEY,
 });
 
 const summarizeText = async (text) => {
   try {
-    if (!process.env.OPENAI_API_KEY) {
-      throw new Error("OPENAI_API_KEY missing");
+    if (!process.env.NVIDIA_API_KEY) {
+      throw new Error("NVIDIA_API_KEY missing");
     }
 
     const response = await client.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "meta/llama-3.1-8b-instruct",
       messages: [
         {
           role: "system",
@@ -22,13 +23,13 @@ const summarizeText = async (text) => {
           content: `Summarize this note in a short professional way:\n\n${text}`,
         },
       ],
+      temperature: 0.4,
       max_tokens: 200,
-      temperature: 0.5,
     });
 
     return response.choices[0].message.content;
   } catch (error) {
-    console.error("OPENAI ERROR:", error);
+    console.error("NVIDIA AI ERROR:", error);
     throw error;
   }
 };
