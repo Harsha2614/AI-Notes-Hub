@@ -112,10 +112,12 @@ const summarizeNote = async (req, res) => {
       summary
     });
   } catch (error) {
-    res.status(500).json({
-      message: error.message
-    });
-  }
+  console.log("Gemini Error:", error);
+
+  res.status(500).json({
+    message: error.message
+  });
+}
 };
 
 module.exports = {
