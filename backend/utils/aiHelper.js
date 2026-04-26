@@ -1,29 +1,34 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const OpenAI = require("openai");
+
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 const summarizeText = async (text) => {
   try {
-    const apiKey = process.env.GEMINI_API_KEY;
-
-    if (!apiKey) {
-      throw new Error("GEMINI_API_KEY missing");
+    if (!process.env.OPENAI_API_KEY) {
+      throw new Error("OPENAI_API_KEY missing");
     }
 
-    const genAI = new GoogleGenerativeAI(apiKey);
-
-    const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash-latest"
+    const response = await client.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "system",
+          content: "You are a professional note summarizer.",
+        },
+        {
+          role: "user",
+          content: `Summarize this note in a short professional way:\n\n${text}`,
+        },
+      ],
+      max_tokens: 200,
+      temperature: 0.5,
     });
 
-    const prompt = `Summarize this note professionally:\n\n${text}`;
-
-    const result = await model.generateContent(prompt);
-
-    const response = await result.response;
-
-    return response.text();
-
+    return response.choices[0].message.content;
   } catch (error) {
-    console.error("GEMINI ERROR:", error);
+    console.error("OPENAI ERROR:", error);
     throw error;
   }
 };
