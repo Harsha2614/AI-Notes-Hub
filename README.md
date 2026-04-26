@@ -10,15 +10,14 @@ This project was built as a Full Stack Developer Internship assignment and demon
 
 ### Frontend (Vercel)
 
-Add your deployed frontend link here
+https://ai-notes-hub-seven.vercel.app/
 
 ### Backend (Render)
 
-Add your deployed backend link here
+https://ai-notes-hub-qf3m.onrender.com
 
 ### GitHub Repository
-
-Add your GitHub repository link here
+https://github.com/Harsha2614/AI-Notes-Hub
 
 ---
 
@@ -178,25 +177,6 @@ Users can click:
 The app sends note content to NVIDIA AI API and returns a short professional summary instantly.
 
 This makes the project stand out from normal CRUD applications.
-
----
-
-# Screenshots 📸
-
-Add screenshots here:
-
-* Home Page
-* Signup Page
-* Login Page
-* Dashboard
-* Create Note
-* AI Summary Feature
-
-Example:
-
-```md
-![Dashboard](your-image-link)
-```
 
 ---
 
