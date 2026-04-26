@@ -1,12 +1,10 @@
-// Login.jsx
-
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mail, Lock, LogIn, Sparkles } from "lucide-react";
 import API from "../api/axios";
 
-export function Login() {
+function Login() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -26,7 +24,6 @@ export function Login() {
 
     try {
       const res = await API.post("/auth/login", formData);
-
       localStorage.setItem("token", res.data.token);
       alert("Login Successful");
       navigate("/dashboard");
@@ -50,6 +47,7 @@ export function Login() {
               <Sparkles className="w-6 h-6" />
             </div>
           </div>
+
           <h2 className="text-3xl font-bold">Welcome Back</h2>
           <p className="text-gray-500">Login to your AI Notes Hub</p>
         </div>
@@ -87,8 +85,17 @@ export function Login() {
           Login
         </button>
 
+        <div className="flex justify-center">
+          <Link
+            to="/"
+            className="text-sm font-medium text-gray-600 hover:text-black transition"
+          >
+            ← Back to Home
+          </Link>
+        </div>
+
         <p className="text-center text-sm text-gray-600">
-          Don’t have an account? {" "}
+          Don’t have an account?{" "}
           <Link to="/signup" className="font-semibold text-black">
             Signup
           </Link>
@@ -99,5 +106,3 @@ export function Login() {
 }
 
 export default Login;
-
-

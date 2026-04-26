@@ -100,6 +100,15 @@ function Signup() {
           Signup
         </button>
 
+        <div className="flex justify-center">
+          <Link
+            to="/"
+            className="text-sm font-medium text-gray-600 hover:text-blue-600 transition"
+          >
+            ← Back to Home
+          </Link>
+        </div>
+
         <p className="text-center text-sm text-gray-600">
           Already have an account?{" "}
           <Link to="/login" className="font-semibold text-blue-600">
